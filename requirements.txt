@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard] 
+sqlalchemy
+grpcio
+grpcio-tools
+protobuf
+pydantic
