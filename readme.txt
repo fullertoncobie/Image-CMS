@@ -1,58 +1,138 @@
-Assignment 2
+## Prerequisites
 
-Prerequisites
-A requirements.txt file is included. Run the file with:
-	pip install -r requirements.txt
+A `requirements.txt` file is included. Install the necessary dependencies by running:
+
+```bash
+pip install -r requirements.txt
 
 Server Setup
-To setup the server, run main.py, which will create the database, establish servers for REST and gRPC apis, and initialize the relevant infrastructure.
 
-main.py has two option arguments for specifying the port for either server. Default values will be used if these are not provided.
-	python main.py [--rest-port PORT] [--grpc-port PORT]
+To set up the server, run main.py. This script will:
+
+    Create the necessary database.
+    Establish servers for both REST and gRPC APIs.
+    Initialize other relevant infrastructure.
+
+You can specify optional ports for the REST and gRPC servers. If not provided, default ports will be used.
+Bash
+
+python main.py [--rest-port PORT] [--grpc-port PORT]
 
 Client Usage
-A sample client in the form of a CLI has been provided. The sample client will default to the default ports of the servers unless otherwise specific in optional arguments.
-	python client.py [--rest-port PORT] [--grpc-port PORT]
-The CLI has the following commands:
-- List all images with optional filters
-	list [--author "<author>"] [--tags <tags>]  
-- Get image by ID  
-	get <id>
-- Upload an image (use quotes for values with spaces)                              
-	upload <file> "<title>" "<author>" <tags>   
-- Update an image
-	update <id> [--title "<title>"] [--author "<author>"] [--tags <tags>] 
-- Delete an image
-	delete <id>                                 
-- Export images to files
-	export [--author "<author>"] [--tags <tags>] [--dir <directory>] 
-- Upload sample images
-	upload-samples
-- Set server ports
-	ports <rest> <grpc>                         
-- Exit the program
-	exit 
-                                       
-Spaces In Arguments
-For values that contain spaces (like author names or image titles), use quotation marks around the value:
+
+A sample Command Line Interface (CLI) client (client.py) is provided for interacting with the server. By default, it connects to the server's default ports, but you can specify different ports using optional arguments:
+Bash
+
+python client.py [--rest-port PORT] [--grpc-port PORT]
+
+CLI Commands
+
+The client supports the following commands:
+
+    List all images with optional filters:
+    Bash
+
+list [--author "<author>"] [--tags <tags>]
+
+Get image by ID:
+Bash
+
+get <id>
+
+Upload an image: (Use quotes for values with spaces)
+Bash
+
+upload <file> "<title>" "<author>" <tags>
+
+Update an image:
+Bash
+
+update <id> [--title "<title>"] [--author "<author>"] [--tags <tags>]
+
+Delete an image:
+Bash
+
+delete <id>
+
+Export images to files:
+Bash
+
+export [--author "<author>"] [--tags <tags>] [--dir <directory>]
+
+Upload sample images: (Populates the database with sample data)
+Bash
+
+upload-samples
+
+Set server ports for the client: (Updates the ports the client tries to connect to)
+Bash
+
+ports <rest_port> <grpc_port>
+
+Exit the program:
+Bash
+
+    exit
+
+Handling Spaces in Arguments
+
+For command arguments that contain spaces (e.g., author names, image titles), enclose the value in double quotation marks ("). Tags should be comma-separated without spaces unless the tag itself contains a space (which is generally discouraged).
+
+Example:
+Bash
+
 upload image.jpg "Great image" "Amazing Photographer" nature,landscape
 
-Listing images
-list
-list --author "Photographer 1"
-list --tags landscape,nature
+Command Examples
+Listing Images
 
-Uploading an image
+    List all images:
+    Bash
+
+list
+
+List images by a specific author:
+Bash
+
+list --author "Photographer 1"
+
+List images matching specific tags (comma-separated):
+Bash
+
+    list --tags landscape,nature
+
+Uploading an Image
+Bash
+
 upload path/to/image.jpg "Campus fountain" "Seattle University" architecture,fountain,urban
 
-Updating an image
+Updating an Image
+
+    Update title and author for image ID 3:
+    Bash
+
 update 3 --title "New Title" --author "New Author"
-update 5 --tags nature,wildlife,animal
+
+Update only the tags for image ID 5:
+Bash
+
+    update 5 --tags nature,wildlife,animal
 
 Exporting Images
+
+    Export all images to a specific directory named my_exports:
+    Bash
+
 export --dir my_exports
-export --author "John Photo" --tags landscape
+
+Export images by a specific author matching certain tags:
+Bash
+
+    export --author "John Photo" --tags landscape
 
 Sample Images
-The client includes a feature to upload sample images to populate the database by running:
-Upload-samples
+
+To quickly populate the database with some sample data for testing, use the upload-samples command in the client:
+Bash
+
+upload-samples
